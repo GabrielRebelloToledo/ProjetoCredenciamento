@@ -1,0 +1,202 @@
+<div class="content" *ngIf="!salver">
+    <div class="col-md-12" >
+      <div class="row">
+        <div class="col-md-12">
+          <h4 style="font-weight: bold;color: black;">Relatório de Credenciamentos</h4>
+
+          <h4 id="periodo">Periodo informado: ({{data1 | date: 'dd/MM/yyyy'}} à {{data2 | date: 'dd/MM/yyyy'}}) - <a (click)="novaBusca()" style="text-decoration: underline;cursor:pointer;color: blue;">Nova Busca</a> - Salvar em PDF <a (click)="exportPDF()" class="btn btn-danger">PDF</a></h4>
+          
+          <form class="form-inline" [formGroup]="credenciamentoForm" >
+            <div class="input-group" id="datas">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="">Data Inicio/Fim</span>
+              </div>
+              <input type="date" class="form-control" id="data1">
+              <input type="date" class="form-control" id="data2">
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="mun">
+                <option selected value="todos">Todos</option>
+                <option *ngFor="let municipio of ListaMunicipio" [value]="">{{municipio.municipio}}</option>
+              </select>
+              <div class="input-group-append">
+                <a class=" btn btn-success" (click)="buscar2()">Buscar</a>
+                <!-- <span class="input-group-text" id="">Data Inicio/Fim</span> -->
+              </div>
+            </div>
+              <!-- <button type="button" (click)="buscar2()">Buscar</button>
+              <button type="button" (click)="p1()">Mostrar</button>
+              <button (click)="exportPDF()">PDF</button> -->
+            
+          </form>
+        </div>
+      </div>
+        
+        <div class="row mt-5">
+          <div class="loader" *ngIf="contadorEsgotado"></div>
+        <div style="margin-left: auto;margin-right:auto; text-align:center" *ngIf="contadorEsgotado">Aguarde!</div>  
+
+        <div style="margin-left: auto;margin-right:auto; text-align:center" *ngIf="periodo">
+            <h2>Não existe(m) cadastro(s) no periodo informado!</h2>
+        </div>  
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-sm-8">
+                <div style="height: 20rem; ">
+                  <table class="table table-responsive ml-2 " style="font-size: 15px;" *ngIf="listaSomaClinicas.length > 0 && !contadorEsgotado && !periodo && !unico">
+                    <thead>
+                      <tr>
+                        <th scope="col" >Municipio</th>
+                        <th scope="col" >Clinica</th>
+                        <th scope="col" >Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let aluno of teste2">
+                          <td>{{aluno.municipio}}</td>
+                          <td>{{aluno.clinica}}</td>
+                          <td>R$ {{aluno.SaldoTotalSistema}}</td>
+                          <!-- <td>
+                              <button class="btn btn-outline-primary ml-2" (click)="editarAluno(aluno.id)">Editar</button>
+                              <button class="btn btn-outline-danger ml-2" (click)="deletarAluno(aluno.id)">Excluir</button>
+                          </td> -->
+                      </tr>
+                  </tbody>
+                  </table>
+                  <table class="table table-responsive ml-2 " style="font-size: 15px;" *ngIf="listaSomaClinicas.length > 0 && !contadorEsgotado && !periodo && unico">
+                    <thead>
+                      <tr>
+                        <th scope="col" >Municipio</th>
+                        <th scope="col" >Clinica</th>
+                        <th scope="col" >Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let aluno of ListaCredenciamento2">
+                          <td>{{aluno.municipio}}</td>
+                          <td>{{aluno.clinica}}</td>
+                          <td>R$ {{aluno.SaldoTotalSistema}}</td>
+                          <!-- <td>
+                              <button class="btn btn-outline-primary ml-2" (click)="editarAluno(aluno.id)">Editar</button>
+                              <button class="btn btn-outline-danger ml-2" (click)="deletarAluno(aluno.id)">Excluir</button>
+                          </td> -->
+                      </tr>
+                  </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div style="height: 20rem; ">
+                  <table class="table table-responsive " style="font-size: 15px;" *ngIf="listaSomaClinicas.length > 0 && !contadorEsgotado && !periodo">
+                    <thead>
+                      <tr>
+                        <th scope="col">Municipio</th>
+                        
+                        <th scope="col">Valor Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let aluno of ListaCredenciamento">
+                          <td>{{aluno.municipio}}</td>
+                          
+                          <td>R$ {{aluno.SaldoTotalSistema}}</td>
+                          <!-- <td>
+                              <button class="btn btn-outline-primary ml-2" (click)="editarAluno(aluno.id)">Editar</button>
+                              <button class="btn btn-outline-danger ml-2" (click)="deletarAluno(aluno.id)">Excluir</button>
+                          </td> -->
+                      </tr>
+                  </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
+          
+          
+        </div>
+        
+      </div>
+    </div>
+  
+  
+  
+  <div class="col-md-12" >
+    <div class="row">
+      <div class="col-md-8 ml-3">
+        <p *ngIf="salver">Clique <a (click)="exportPDF2()" style="color: blue;text-decoration:underline; cursor: pointer;">aqui</a> para Salvar caso o download não tenha iniciado automaticamente.</p>
+        <p *ngIf="salver" (click)="novaBusca()">Clique <a (click)="exportPDF2()" style="color: blue;text-decoration:underline; cursor: pointer;">aqui</a> para uma nova pesquisa.</p>
+      </div>
+    </div>
+    <div class="row" style="margin-left: auto;margin-right: auto; margin-top: 30px;" #exportContent>
+      <h1 style="margin-left: 150px ;margin-bottom: 0px;" *ngIf="salver">Relatório de Credenciamento</h1>
+      <h3 style="margin-left: 195px; font-size: 13px;margin-top: 1px;" *ngIf="salver"> Período: ({{data1 | date: 'dd/MM/yyyy'}} à {{data2 | date: 'dd/MM/yyyy'}})</h3>
+      <div class="col-md-12">
+        <table class="linhasAlternadas"  *ngIf="salver && !unico"  style="margin-left: 100px">
+          <thead>
+            <tr>
+              <th scope="col" >Municipio</th>
+              <th scope="col" >Clinica</th>
+              <th scope="col" >Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let aluno of teste2">
+                <td>{{aluno.municipio}}</td>
+                <td>{{aluno.clinica}}</td>
+                <td>R$ {{aluno.SaldoTotalSistema}}</td>
+                <!-- <td>
+                    <button class="btn btn-outline-primary ml-2" (click)="editarAluno(aluno.id)">Editar</button>
+                    <button class="btn btn-outline-danger ml-2" (click)="deletarAluno(aluno.id)">Excluir</button>
+                </td> -->
+            </tr>
+        </tbody>
+        </table>
+        <table class="linhasAlternadas"  *ngIf="salver && unico"  style="margin-left: 100px">
+          <thead>
+            <tr>
+              <th scope="col" >Municipio</th>
+              <th scope="col" >Clinica</th>
+              <th scope="col" >Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let aluno of ListaCredenciamento2">
+                <td>{{aluno.municipio}}</td>
+                <td>{{aluno.clinica}}</td>
+                <td>R$ {{aluno.SaldoTotalSistema}}</td>
+                <!-- <td>
+                    <button class="btn btn-outline-primary ml-2" (click)="editarAluno(aluno.id)">Editar</button>
+                    <button class="btn btn-outline-danger ml-2" (click)="deletarAluno(aluno.id)">Excluir</button>
+                </td> -->
+            </tr>
+        </tbody>
+        </table>
+        <table class="linhasAlternadas"  *ngIf="salver"  style="margin-left: 100px">
+          <thead>
+            <tr>
+              <th scope="col">Municipio</th>
+              
+              <th scope="col">Valor Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let aluno of ListaCredenciamento">
+                <td>{{aluno.municipio}}</td>
+                
+                <td>R$ {{aluno.SaldoTotalSistema}}</td>
+                <!-- <td>
+                    <button class="btn btn-outline-primary ml-2" (click)="editarAluno(aluno.id)">Editar</button>
+                    <button class="btn btn-outline-danger ml-2" (click)="deletarAluno(aluno.id)">Excluir</button>
+                </td> -->
+            </tr>
+        </tbody>
+        </table>
+      </div>
+      
+      
+    </div>
+    
+  </div>
+  
+ 
+  

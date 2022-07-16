@@ -1,0 +1,134 @@
+/* .teste{
+    width: 100vh;
+    height: 100%;
+   
+   margin-top: 1em;
+}label{
+    color: black;font-size:20px;
+    margin-left: 3px;
+} */
+/* .container2{
+    margin-left: 0.2em;
+    margin-right: auto;
+    width: 80vw;
+    height: 400px;
+    border: 1px solid red;
+    overflow-y: auto;
+} */
+
+/* Loader */
+
+.loader {
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loader:before,
+.loader:after {
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+
+.loader:before {
+    animation: ball1 2s infinite;
+    background-color: #030303;
+    box-shadow: 30px 0 0 #09309c;
+    margin-bottom: 10px;
+}
+
+.loader:after {
+    animation: ball2 2s infinite;
+    background-color: #3350f7;
+    box-shadow: 30px 0 0 #768f1e;
+}
+
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg) scale(0.8);
+        -moz-transform: rotate(0deg) scale(0.8);
+    }
+    50% {
+        -webkit-transform: rotate(360deg) scale(1.2);
+        -moz-transform: rotate(360deg) scale(1.2);
+    }
+    100% {
+        -webkit-transform: rotate(720deg) scale(0.8);
+        -moz-transform: rotate(720deg) scale(0.8);
+    }
+}
+
+@keyframes ball1 {
+    0% {
+        box-shadow: 30px 0 0 #F2994A;
+    }
+    50% {
+        box-shadow: 0 0 0 #F2994A;
+        margin-bottom: 0;
+        -webkit-transform: translate(15px, 15px);
+        -moz-transform: translate(15px, 15px);
+    }
+    100% {
+        box-shadow: 30px 0 0 #F2994A;
+        margin-bottom: 10px;
+    }
+}
+
+@keyframes ball2 {
+    0% {
+        box-shadow: 30px 0 0 #4719ec;
+    }
+    50% {
+        box-shadow: 0 0 0 #4719ec;
+        margin-top: -20px;
+        -webkit-transform: translate(15px, 15px);
+        -moz-transform: translate(15px, 15px);
+    }
+    100% {
+        box-shadow: 30px 0 0 #bf0d75;
+        margin-top: 0;
+    }
+}
+
+table.linhasAlternadas, th, td {
+    border: 1px black solid;
+    width:400px;
+    margin-top: 5px;
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    
+  } 
+  .content {
+    height: calc(100vh - 98px);
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 32px;
+    display: flex;
+  /*   color: lightgray; */
+}
+
+
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .content {
+        height: calc(100vh);
+        border-radius: 10px;
+        margin: 16px;
+        margin-left: 32px;
+        display: flex;
+      /*   color: lightgray; */
+    }
+
+
+ }
+
+ #periodo{
+    display: none;
+    
+ }

@@ -1,0 +1,78 @@
+<div class="content mat-elevation-z8">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-5 mt-3">
+        <h4 style="font-weight: bold;color: black;">Lançamento de credenciamento</h4>
+        <form class="form-inline" [formGroup]="credenciamentoForm" (submit)="submit()">
+          <div class="row">
+            <div class="form-floating mb-3">
+              <select formControlName="municipio" class="form-select" id="floatingSelectGrid1"
+                aria-label="Floating label select example">
+                <option selected>Abra este menu de seleção</option>
+                <option *ngFor="let municipio of ListaMunicipio" [value]="">{{municipio.municipio}}</option>
+              </select>
+              <label for="floatingSelectGrid1" class="pb-5 mt-1">Municipio</label>
+            </div>
+            <div class="form-floating mb-3">
+              <select formControlName="clinica" class="form-select" id="floatingSelectGrid"
+                aria-label="Floating label select example">
+                <option selected>Abra este menu de seleção</option>
+                <option *ngFor="let clinica of ListaClinica" [value]="">{{clinica.clinica}}</option>
+              </select>
+              <label for="floatingSelectGrid" class="pb-5 mt-1">Clinica</label>
+            </div>
+
+            <div class="form-floating mb-6 col-md-12">
+              <div class="row">
+                <div class="form-floating mb-3 ">
+                  <input formControlName="valor" type="number" class="form-control" id="floatingInput">
+                  <label for="floatingInput" class="pb-5 mt-1 ml-2">Valor R$</label>
+                </div>
+                <div class="form-floating mb-3 ">
+                  <input formControlName="data" type="date" class="form-control" id="floatingInput">
+                  <label for="floatingInput" class="pb-5 mt-1 ml-2">Período</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-8 mt-3">
+              <button type="submit" class="btn btn-primary ml-2">Incluir</button>
+              <button type="button" routerLink="/home" class="btn btn-warning ml-2">Voltar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4 mt-2">
+        <div class="table-responsive rr" >
+          <table class="table table-sm table-striped ml-2" style="font-size: 13px;">
+            <thead>
+              <tr>
+                <th scope="col" >ID</th>
+                <th scope="col" >Municipio</th>
+                <th scope="col" >Clinica</th>
+                <th scope="col" >Periodo</th>
+                <th scope="col" >Valor</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let aluno of ListaCredenciamento">
+                  <td>{{aluno.id}}</td>
+                  <td>{{aluno.municipio}}</td>
+                  <td>{{aluno.clinica}}</td>
+                  <td>{{aluno.periodo}}</td>
+                  <td>R$ {{aluno.valor}}</td>
+                  
+                  <!-- <td>
+                      <button class="btn btn-outline-primary ml-2" (click)="editarAluno(aluno.id)">Editar</button>
+                      <button class="btn btn-outline-danger ml-2" (click)="deletarAluno(aluno.id)">Excluir</button>
+                  </td> -->
+              </tr>
+          </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,56 @@
+<mat-toolbar>
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+    Início
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" mode="side" opened>
+        <img class="avatar mat-elevation-z8" src="../assets/eu.jpeg" />
+        <h4 class="name">Gabriel Toledo</h4>
+        <p class="designation">Engenheiro de Produção</p>
+<mat-divider></mat-divider>
+        <button mat-button class="menu-button" [routerLink]="'/home'"> 
+            <mat-icon>home</mat-icon>
+            <span>Início</span>
+        </button>
+        <button mat-button class="menu-button" [routerLink]="'/home'">
+            <mat-icon>person</mat-icon>
+            <span>Perfil</span>
+        </button>
+        <button mat-button class="menu-button" [routerLink]="'/novo/clinica'">
+            <mat-icon>store</mat-icon>
+            <span>Clinicas</span>
+        </button>
+        <button mat-button class="menu-button" [routerLink]="'/novo/municipio'">
+            <mat-icon>account_balance</mat-icon>
+            <span>Municípios</span>
+        </button>
+        <button mat-button class="menu-button" [routerLink]="'/novo/credenciamento'">
+            <mat-icon>
+                attach_money
+                </mat-icon>
+            <span>Credenciamento</span>
+        </button>
+        <button mat-button class="menu-button" [routerLink]="'/relatorio-credenciamento'">
+            <mat-icon>insert_chart</mat-icon>
+            <span>Relatório</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-button class="menu-button">
+            <mat-icon>help</mat-icon>
+            <span>Ajuda</span>
+        </button>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div >
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

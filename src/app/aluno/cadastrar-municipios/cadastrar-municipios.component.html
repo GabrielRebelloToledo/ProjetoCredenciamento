@@ -1,0 +1,54 @@
+<div class="content mat-elevation-z8">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-5">
+          <h4 style="font-weight: bold;color: black;">Lançamento de novos municipios</h4>
+          <form class="form-inline" [formGroup]="municipioForm" (submit)="submit()">
+            
+                
+                  <div class="form-floating  col-md-6">
+                    <input formControlName="municipio" type="text" class="form-control" id="floatingInput" placeholder="name@example.com" style="height: 30px; width: 100%;">
+                    <label for="floatingInput" style="font-size: 14px;" >Nome do municipio</label>
+                  </div>
+                  <div class="col-md">
+                    <button type="submit" class="btn btn-primary ml-2 mt-1">Incluir</button>
+                    <button type="button" routerLink="/home" class="btn btn-warning ml-2 mt-1">Voltar</button>
+                  </div>
+          </form>
+        </div>
+        <div class="col-md-4 mt-2">
+          <div class="table-responsive rr" >
+            <table class="table table-sm table-striped ml-2" style="font-size: 13px;">
+              <thead>
+                <tr>
+                  <th scope="col" >ID</th>
+                  <th scope="col" >Municipio</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let aluno of ListaMunicipio">
+                    <td>{{aluno.id}}</td>
+                    <td>{{aluno.municipio}}</td>
+                    
+                    <!-- <td>
+                        <button class="btn btn-outline-primary ml-2" (click)="editarAluno(aluno.id)">Editar</button>
+                        <button class="btn btn-outline-danger ml-2" (click)="deletarAluno(aluno.id)">Excluir</button>
+                    </td> -->
+                </tr>
+            </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mt-5" >
+        
+      </div>
+    </div>
+  
+  </div>
+
+
+
+
