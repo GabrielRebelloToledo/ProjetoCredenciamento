@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { MaterialModule } from './compartilhado/componentes/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlunoModule } from './aluno/aluno.module';
+import { AppMsgErroModule } from './compartilhado/componentes/app-msg-erro/app-msg-erro.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { AlunoModule } from './aluno/aluno.module';
     ReactiveFormsModule,
     HomeModule,
     AlunoModule,
-    
+    AppMsgErroModule,
 
   ],
   providers: [],

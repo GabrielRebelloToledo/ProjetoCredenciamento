@@ -5,6 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
+    styleUrls: ['./login.component.css'],
     templateUrl: './login.component.html'
 })
 export class LoginComponent{

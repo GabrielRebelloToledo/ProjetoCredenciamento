@@ -80,6 +80,7 @@ export class AlunoService {
 
   /* Novo a partir daqui !!! */
   CredenciamentoCreate(credenciamento: Credenciamento) {
+    console.log(credenciamento)
     return this.http.post(`${API}credenciamento`, credenciamento).pipe(take(1));
   }
   MunicipioCreate(municipio: Municipio) {
@@ -125,16 +126,16 @@ export class AlunoService {
   getAllCredenciamentoT(): Observable<Credenciamento[]> {
     return this.http.get<Credenciamento[]>(`${API}credenciamento/todos`);
   }
-  getAllCredenciamento(dt1,dt2): Observable<Credenciamento[]> {
-    return this.http.get<Credenciamento[]>(`${API}credenciamento/${dt1}/${dt2}`);
+  getAllCredenciamento(dt1,dt2,exame): Observable<Credenciamento[]> {
+    return this.http.get<Credenciamento[]>(`${API}credenciamento/${dt1}/${dt2}/${exame}`);
   }
-  getAllCredenciamento2(dt1,dt2,mun): Observable<Credenciamento[]> {
+  getAllCredenciamento2(dt1,dt2,mun,exame): Observable<Credenciamento[]> {
     console.log(dt1,dt2,mun)
-    return this.http.get<Credenciamento[]>(`${API}credenciamento/municipio/${dt1}/${dt2}/${mun}`);
+    return this.http.get<Credenciamento[]>(`${API}credenciamento/municipio/${dt1}/${dt2}/${mun}/${exame}`);
   }
-  getAllCredenciamentosoma(dt1,dt2,mun): Observable<Credenciamento[]> {
+  getAllCredenciamentosoma(dt1,dt2,mun,exame): Observable<Credenciamento[]> {
     /* console.log(dt1,dt2,mun) */
-    return this.http.get<Credenciamento[]>(`${API}credenciamento/soma/${dt1}/${dt2}/${mun}`);
+    return this.http.get<Credenciamento[]>(`${API}credenciamento/soma/${dt1}/${dt2}/${mun}/${exame}`);
 
   }
 }

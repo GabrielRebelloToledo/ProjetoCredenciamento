@@ -46,6 +46,7 @@ export class LancarCredenciamentoComponent implements OnInit {
       valor: ['', Validators.required],
       municipio: ['', Validators.required],
       clinica: ['', Validators.required],
+      exame: ['', Validators.required],
       data: ['', Validators.required],
     });
   }
@@ -58,6 +59,7 @@ export class LancarCredenciamentoComponent implements OnInit {
         valor: credenciamento[0].valor,
         municipio: credenciamento[0].municipio,
         clinica: credenciamento[0].clinica,
+        exame: credenciamento[0].clinica,
         data: credenciamento[0].data
       }
     )

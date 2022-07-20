@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar >
     <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
         <mat-icon *ngIf="!sidenav.opened">
             menu
@@ -7,49 +7,96 @@
             close
         </mat-icon>
     </button>
-    Início
+    <div *ngIf="logado">Início</div>
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" mode="side" opened>
-        <img class="avatar mat-elevation-z8" src="../assets/eu.jpeg" />
-        <h4 class="name">Gabriel Toledo</h4>
-        <p class="designation">Engenheiro de Produção</p>
-<mat-divider></mat-divider>
-        <button mat-button class="menu-button" [routerLink]="'/home'"> 
-            <mat-icon>home</mat-icon>
-            <span>Início</span>
-        </button>
-        <button mat-button class="menu-button" [routerLink]="'/home'">
-            <mat-icon>person</mat-icon>
-            <span>Perfil</span>
-        </button>
-        <button mat-button class="menu-button" [routerLink]="'/novo/clinica'">
-            <mat-icon>store</mat-icon>
-            <span>Clinicas</span>
-        </button>
-        <button mat-button class="menu-button" [routerLink]="'/novo/municipio'">
-            <mat-icon>account_balance</mat-icon>
-            <span>Municípios</span>
-        </button>
-        <button mat-button class="menu-button" [routerLink]="'/novo/credenciamento'">
-            <mat-icon>
-                attach_money
+        <div *ngIf="!logado">
+            <img class="avatar mat-elevation-z8" src="../assets/user.jpg" />
+            <h4 class="name">Login</h4>
+            <form #form="ngForm" [formGroup]="loginForm" (submit)="login()" class="form-signin">
+                <h1>Acesso ao sistema</h1>
+                <div class="form-group">
+                    <input formControlName="login" type="text" placeholder="Usuário" class="form-control">
+                    <app-msg-erro mensagem="O usuário é obrigatório!" *ngIf="loginForm.get('login').errors?.required && 
+                        (form.submitted || loginForm.get('login').touched)">
+                    </app-msg-erro>
+                </div>
+                <div class="form-group">
+                    <input formControlName="password" type="password" placeholder="Senha" class="form-control">
+                    <app-msg-erro mensagem="A senha é obrigatória!" *ngIf="loginForm.get('password').errors?.required && 
+                        (form.submitted || loginForm.get('password').touched)">
+                    </app-msg-erro>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" *ngIf="!lopping">Entrar</button>
+                    <div class="" style="display: flex;justify-content: center;" *ngIf="lopping">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <app-msg-erro mensagem="Senha ou usuário incorretos" *ngIf="form.valid && form.submitted && loginError == false"></app-msg-erro>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="logado">
+            <img class="avatar mat-elevation-z8" src="../assets/user.jpg" />
+            <h4 class="name">{{users}}</h4>
+            <!-- <p class="designation">Engenheiro de Produção</p> -->
+            <mat-divider></mat-divider>
+
+            <button mat-button class="menu-button" [routerLink]="'/home'">
+                <mat-icon>home</mat-icon>
+                <span>Início</span>
+            </button>
+            <button mat-button class="menu-button" [routerLink]="'/home'">
+                <mat-icon>person</mat-icon>
+                <span>Perfil</span>
+            </button>
+            <button mat-button class="menu-button" [routerLink]="'/novo/clinica'">
+                <mat-icon>store</mat-icon>
+                <span>Clinicas</span>
+            </button>
+            <button mat-button class="menu-button" [routerLink]="'/novo/municipio'">
+                <mat-icon>account_balance</mat-icon>
+                <span>Municípios</span>
+            </button>
+            <button mat-button class="menu-button" [routerLink]="'/novo/credenciamento'">
+                <mat-icon>
+                    attach_money
                 </mat-icon>
-            <span>Credenciamento</span>
-        </button>
-        <button mat-button class="menu-button" [routerLink]="'/relatorio-credenciamento'">
-            <mat-icon>insert_chart</mat-icon>
-            <span>Relatório</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-button class="menu-button">
-            <mat-icon>help</mat-icon>
-            <span>Ajuda</span>
-        </button>
+                <span>Credenciamento</span>
+            </button>
+            <button mat-button class="menu-button" [routerLink]="'/relatorio-credenciamento'">
+                <mat-icon>insert_chart</mat-icon>
+                <span>Relatório</span>
+            </button>
+            <button mat-button class="menu-button" (click)="logout()">
+                <mat-icon>vpn_key</mat-icon>
+                <span>Sair</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-button class="menu-button">
+                <mat-icon>help</mat-icon>
+                <span>Ajuda</span>
+            </button>
+
+        </div>
     </mat-sidenav>
 
+
+
+
+
     <mat-sidenav-content>
-        <div >
+        <div>
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

@@ -32,6 +32,7 @@ export class RelatorioCredenciamentoComponent implements OnInit {
   teste;
   data1;
   data2;
+  exame;
   contadorEsgotado: boolean = false;
   salver: boolean = false;
   periodo: boolean = false;
@@ -87,13 +88,15 @@ export class RelatorioCredenciamentoComponent implements OnInit {
   pesquisaCredenciamento() {
     let elemento1 = (<HTMLInputElement>document.getElementById("data1")).value;
     let elemento2 = (<HTMLInputElement>document.getElementById("data2")).value;
-    this.AlunoService.getAllCredenciamento(elemento1,elemento2).subscribe(result => { this.ListaCredenciamento = result })
+    let elemento3 = (<HTMLInputElement>document.getElementById("exame")).value;
+    this.AlunoService.getAllCredenciamento(elemento1,elemento2,elemento3).subscribe(result => { this.ListaCredenciamento = result })
   }
   pesquisaCredenciamento2() {
     let mun = (<HTMLInputElement>document.getElementById("mun")).value;
     let elemento1 = (<HTMLInputElement>document.getElementById("data1")).value;
     let elemento2 = (<HTMLInputElement>document.getElementById("data2")).value;
-    this.AlunoService.getAllCredenciamento2(elemento1,elemento2,mun).subscribe(result => { this.ListaCredenciamento = result })
+    let elemento3 = (<HTMLInputElement>document.getElementById("exame")).value;
+    this.AlunoService.getAllCredenciamento2(elemento1,elemento2,mun,elemento3).subscribe(result => { this.ListaCredenciamento = result })
   }
 
   buscar2() {
@@ -102,19 +105,20 @@ export class RelatorioCredenciamentoComponent implements OnInit {
       case 'todos':
         this.novaPesquisa = true; 
         this.contadorEsgotado = true;
-    
+         
         let elemento1 = (<HTMLInputElement>document.getElementById("data1")).value;
         this.data1 = (<HTMLInputElement>document.getElementById("data1")).value;
         this.data2 = (<HTMLInputElement>document.getElementById("data2")).value;
          (<HTMLInputElement>document.getElementById("datas")).style.display="none";
          (<HTMLInputElement>document.getElementById("periodo")).style.display="block"
         let elemento2 = (<HTMLInputElement>document.getElementById("data2")).value; 
-        
+        let elemento5 = (<HTMLInputElement>document.getElementById("exame")).value;
+        this.exame = (<HTMLInputElement>document.getElementById("exame")).value; 
      
         for (var i = 0; i < this.ListaMunicipio.length; i++) {
           
           console.log(this.ListaMunicipio[i]['municipio'])
-          this.AlunoService.getAllCredenciamentosoma(elemento1, elemento2, this.ListaMunicipio[i]['municipio']).subscribe(
+          this.AlunoService.getAllCredenciamentosoma(elemento1, elemento2, this.ListaMunicipio[i]['municipio'], elemento5).subscribe(
     
             result => {
               
@@ -145,12 +149,13 @@ export class RelatorioCredenciamentoComponent implements OnInit {
         let elemento3 = (<HTMLInputElement>document.getElementById("data1")).value;
         this.data1 = (<HTMLInputElement>document.getElementById("data1")).value;
         this.data2 = (<HTMLInputElement>document.getElementById("data2")).value;
+        this.exame = (<HTMLInputElement>document.getElementById("exame")).value; 
          (<HTMLInputElement>document.getElementById("datas")).style.display="none";
          (<HTMLInputElement>document.getElementById("periodo")).style.display="block"
         let elemento4 = (<HTMLInputElement>document.getElementById("data2")).value; 
+        let elemento6 = (<HTMLInputElement>document.getElementById("exame")).value; 
         
-        
-          this.AlunoService.getAllCredenciamentosoma(elemento3, elemento4, mun).subscribe(
+          this.AlunoService.getAllCredenciamentosoma(elemento3, elemento4, mun,elemento6).subscribe(
             result => {
               this.ListaCredenciamento2 = result,
                 this.listaSomaClinicas.push(this.ListaCredenciamento2);
