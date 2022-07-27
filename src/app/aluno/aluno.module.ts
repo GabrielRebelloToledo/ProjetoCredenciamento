@@ -13,7 +13,7 @@ import { CadastrarClinicasComponent } from './cadastrar-clinicas/cadastrar-clini
 import { CadastrarMunicipiosComponent } from './cadastrar-municipios/cadastrar-municipios.component';
 import { RelatorioCredenciamentoComponent } from './relatorio-credenciamento/relatorio-credenciamento.component';
 import { MaterialModule } from '../compartilhado/componentes/material/material.module';
-
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 @NgModule({
@@ -28,7 +28,8 @@ import { MaterialModule } from '../compartilhado/componentes/material/material.m
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    TextMaskModule
   ],
   exports: [
     CadastroAlunoComponent, 

@@ -15,6 +15,8 @@ import { UserService } from 'src/app/core/user/user.service';
 export class CadastrarClinicasComponent implements OnInit {
   ListaClinica: Clinica[] = [];
   clinicaForm: FormGroup;
+  public myModel = ''
+  public mask = [/[0-9]/, /[0-9]/,'.', /[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/,'/',/[0-9]/, /[0-9]/, /[0-9]/,/[0-9]/,'-',/[0-9]/,/[0-9]/]
 
   constructor(private location: Location,
     private formBuilder: FormBuilder,
