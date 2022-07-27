@@ -86,6 +86,16 @@ export class AlunoService {
   MunicipioCreate(municipio: Municipio) {
     return this.http.post(`${API}municipio`, municipio).pipe(take(1));
   }
+  
+  MunicipioDelete(id) {
+    return this.http.delete<Municipio[]>(`${API}municipio/${id}`);
+  }
+  ClinicaDelete(id) {
+    return this.http.delete<Clinica[]>(`${API}clinica/${id}`);
+  }
+  CredenciamentoDelete(id) {
+    return this.http.delete<Credenciamento[]>(`${API}credenciamento/${id}`);
+  }
 
   ClinicaCreate(clinica: Clinica) {
     return this.http.post(`${API}clinica`, clinica).pipe(take(1));

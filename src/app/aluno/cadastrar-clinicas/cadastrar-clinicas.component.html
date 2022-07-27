@@ -28,6 +28,7 @@
           <table class="table table-sm table-striped ml-2" style="font-size: 13px;">
             <thead>
               <tr>
+                <th scope="col" >Opções</th>
                 <th scope="col" >ID</th>
                 <th scope="col" >Clinica</th>
                 <th scope="col" >CNPJ</th>
@@ -35,6 +36,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let aluno of ListaClinica">
+                
+                  <td><mat-icon style="cursor: pointer;" (click)="deletarClinica(aluno.id)">delete_forever</mat-icon></td>
                   <td>{{aluno.id}}</td>
                   <td>{{aluno.clinica}}</td>
                   <td>{{aluno.cnpj}}</td>

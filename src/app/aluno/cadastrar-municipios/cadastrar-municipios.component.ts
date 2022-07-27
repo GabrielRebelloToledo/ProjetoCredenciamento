@@ -54,6 +54,16 @@ export class CadastrarMunicipiosComponent implements OnInit {
     )
   }
 
+  deletarMunicipio(id) {
+
+    if (window.confirm('Tem certeza que deseja excluir este Município? Ao Excluir você pode afetar alguns relatórios!')) {
+      this.AlunoService.MunicipioDelete(id).subscribe(result => { this.ListaMunicipio = result; })
+      alert('Município excluído.')
+      window.location.reload();
+    }
+
+  }
+
   submit() {
     if (this.municipioForm.value.id) {
       const atualizarAluno = this.municipioForm.getRawValue() as Municipio;
@@ -72,12 +82,12 @@ export class CadastrarMunicipiosComponent implements OnInit {
       const novoAluno = this.municipioForm.getRawValue() as Municipio;
       this.AlunoService.MunicipioCreate(novoAluno).subscribe(
         success => {
-          alert('Receita salva!')
+          alert('Município salvo!')
           this.municipioForm.reset()
           this.pesquisaMunicipio()
         },
         error => {
-          alert('Receita ao salvar.')
+          alert('Erro ao salvar.')
         }
       )
     }

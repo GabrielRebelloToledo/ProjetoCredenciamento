@@ -74,6 +74,16 @@ export class LancarCredenciamentoComponent implements OnInit {
   pesquisaClinica(){
     this.AlunoService.getAllClinica().subscribe(result => { this.ListaClinica = result })
   }
+  deletarCredenciamento(id) {
+
+    if (window.confirm('Tem certeza que deseja excluir este Município? Ao Excluir você pode afetar alguns relatórios!')) {
+      this.AlunoService.CredenciamentoDelete(id).subscribe(result => { this.ListaMunicipio = result; })
+      alert('Município excluído.')
+      window.location.reload();
+    }
+
+  }
+
   submit() {
     if (this.credenciamentoForm.value.id) {
       const atualizarAluno = this.credenciamentoForm.getRawValue() as Credenciamento;
@@ -97,7 +107,7 @@ export class LancarCredenciamentoComponent implements OnInit {
           this.pesquisaCredenciamento();
         },
         error => {
-          alert('Receita ao salvar.')
+          alert('Erro ao salvar.')
         }
       )
     }

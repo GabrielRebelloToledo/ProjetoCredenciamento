@@ -12,6 +12,7 @@ import { LancarCredenciamentoComponent } from './lancar-credenciamento/lancar-cr
 import { CadastrarClinicasComponent } from './cadastrar-clinicas/cadastrar-clinicas.component';
 import { CadastrarMunicipiosComponent } from './cadastrar-municipios/cadastrar-municipios.component';
 import { RelatorioCredenciamentoComponent } from './relatorio-credenciamento/relatorio-credenciamento.component';
+import { MaterialModule } from '../compartilhado/componentes/material/material.module';
 
 
 
@@ -26,7 +27,8 @@ import { RelatorioCredenciamentoComponent } from './relatorio-credenciamento/rel
     RouterModule,
     FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule
   ],
   exports: [
     CadastroAlunoComponent, 

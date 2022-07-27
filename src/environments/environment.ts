@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
- /* production: true,
-  apiUrl: 'http://localhost:5000/api/'   */
+/*  production: true,
+  apiUrl: 'http://localhost:5000/api/'  */ 
   production: true,
   apiUrl: 'https://app-credenciamento.herokuapp.com/api/'
 };

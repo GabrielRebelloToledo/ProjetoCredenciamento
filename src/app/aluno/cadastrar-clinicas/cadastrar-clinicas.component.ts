@@ -45,6 +45,16 @@ export class CadastrarClinicasComponent implements OnInit {
     this.AlunoService.getAllClinica().subscribe(result => { this.ListaClinica = result })
   }
 
+  deletarClinica(id) {
+
+    if (window.confirm('Tem certeza que deseja excluir esta Clinica? Ao Excluir você pode afetar alguns relatórios!')) {
+      this.AlunoService.ClinicaDelete(id).subscribe(result => { this.ListaClinica = result; })
+      alert('Clinica excluída.')
+      window.location.reload();
+    }
+
+  }
+
   editarForm(clinica: Clinica) {
 
     this.clinicaForm.patchValue(
@@ -73,12 +83,12 @@ export class CadastrarClinicasComponent implements OnInit {
       const novoAluno = this.clinicaForm.getRawValue() as Clinica;
       this.AlunoService.ClinicaCreate(novoAluno).subscribe(
         success => {
-          alert('Receita salva!')
+          alert('Clinica salva!')
           this.clinicaForm.reset()
           this.pesquisaClinica()
         },
         error => {
-          alert('Receita ao salvar.')
+          alert('Erro ao salvar.')
         }
       )
     }
