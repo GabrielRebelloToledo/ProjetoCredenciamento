@@ -76,7 +76,7 @@ export class LancarCredenciamentoComponent implements OnInit {
   }
   deletarCredenciamento(id) {
 
-    if (window.confirm('Tem certeza que deseja excluir este Município? Ao Excluir você pode afetar alguns relatórios!')) {
+    if (window.confirm('Tem certeza que deseja excluir este lançamento?')) {
       this.AlunoService.CredenciamentoDelete(id).subscribe(result => { this.ListaMunicipio = result; })
       alert('Município excluído.')
       window.location.reload();
