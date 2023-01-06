@@ -6,7 +6,7 @@ export const environment = {
 /*  production: true,
   apiUrl: 'http://localhost:5000/api/'  */ 
   production: true,
-  apiUrl: 'https://app-credenciamento.herokuapp.com/api/'
+  apiUrl: 'https://conteeduca.com.br:21243/api/'
 };
 
 /*
