@@ -13,7 +13,7 @@ label{
 .rr{
     height: 80vh; 
     overflow-x: false;
-    width: 40vw;
+    width: 50vw;
 }
 @media (min-width: 268px) and (max-width: 991.98px) { 
     .content {

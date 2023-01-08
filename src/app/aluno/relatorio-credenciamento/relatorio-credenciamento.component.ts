@@ -12,6 +12,7 @@ import { Credenciamento } from '../lancar-credenciamento/credenciamento';
 import { timer } from 'rxjs';
 import html2canvas from 'html2canvas';
 import { Municipio } from '../cadastrar-municipios/municipio';
+import { CredenciamentoSoma } from './credeniamentoSoma';
 
 @Component({
   selector: 'app-relatorio-credenciamento',
@@ -24,7 +25,7 @@ export class RelatorioCredenciamentoComponent implements OnInit {
 
   ListaCredenciamento: Credenciamento[] = [];
   ListaMunicipio: Municipio[] = [];
-  ListaCredenciamento2: Credenciamento[] = [];
+  ListaCredenciamentoSoma: CredenciamentoSoma[] = [];
   credenciamentoForm: FormGroup;
   listaNova = [];
   arr = [];
@@ -39,6 +40,7 @@ export class RelatorioCredenciamentoComponent implements OnInit {
   busca: boolean = true;
   novaPesquisa: boolean = false;
   unico: boolean = false;
+  btpdf: boolean = false;
   listaSomaClinicas = [];
 
   constructor(
@@ -54,27 +56,7 @@ export class RelatorioCredenciamentoComponent implements OnInit {
   }
 
 
-  buscar() {
-    
-    this.ListaCredenciamento.pop();
-    this.ListaCredenciamento2.pop();
-    this.listaNova.pop();
-    this.arr.pop();
-
-    
-    /* this.pesquisaCredenciamento(elemento1, elemento2); */
-    /* this.pegarsoma(elemento1,elemento2); */
-
-    this.p1();
-
-    const contador = timer(5000);
-    contador.subscribe(() => {
-      if (this.ListaCredenciamento.length > 0) {
-        this.p1();
-        this.contadorEsgotado = false;
-      }
-    })
-  }
+  
 
   pesquisaMunicipio(){
     this.AlunoService.getAllMunicipio().subscribe(result => { 
@@ -86,120 +68,36 @@ export class RelatorioCredenciamentoComponent implements OnInit {
   }
 
   pesquisaCredenciamento() {
+    let varaux;
     let elemento1 = (<HTMLInputElement>document.getElementById("data1")).value;
     let elemento2 = (<HTMLInputElement>document.getElementById("data2")).value;
-    let elemento3 = (<HTMLInputElement>document.getElementById("exame")).value;
-    this.AlunoService.getAllCredenciamento(elemento1,elemento2,elemento3).subscribe(result => { this.ListaCredenciamento = result })
-  }
-  pesquisaCredenciamento2() {
-    let mun = (<HTMLInputElement>document.getElementById("mun")).value;
-    let elemento1 = (<HTMLInputElement>document.getElementById("data1")).value;
-    let elemento2 = (<HTMLInputElement>document.getElementById("data2")).value;
-    let elemento3 = (<HTMLInputElement>document.getElementById("exame")).value;
-    this.AlunoService.getAllCredenciamento2(elemento1,elemento2,mun,elemento3).subscribe(result => { this.ListaCredenciamento = result })
-  }
-
-  buscar2() {
-    let mun = (<HTMLInputElement>document.getElementById("mun")).value;
-    switch (mun) {
-      case 'todos':
-        this.novaPesquisa = true; 
-        this.contadorEsgotado = true;
-         
-        let elemento1 = (<HTMLInputElement>document.getElementById("data1")).value;
-        this.data1 = (<HTMLInputElement>document.getElementById("data1")).value;
-        this.data2 = (<HTMLInputElement>document.getElementById("data2")).value;
-         (<HTMLInputElement>document.getElementById("datas")).style.display="none";
-         (<HTMLInputElement>document.getElementById("periodo")).style.display="block"
-        let elemento2 = (<HTMLInputElement>document.getElementById("data2")).value; 
-        let elemento5 = (<HTMLInputElement>document.getElementById("exame")).value;
-        this.exame = (<HTMLInputElement>document.getElementById("exame")).value; 
-     
-        for (var i = 0; i < this.ListaMunicipio.length; i++) {
-          
-          console.log(this.ListaMunicipio[i]['municipio'])
-          this.AlunoService.getAllCredenciamentosoma(elemento1, elemento2, this.ListaMunicipio[i]['municipio'], elemento5).subscribe(
-    
-            result => {
-              
-              this.ListaCredenciamento2 = result,
-                this.listaSomaClinicas.push(this.ListaCredenciamento2);
-    
-            })
-        }
-        const contador = timer(3000);
-        contador.subscribe(() => {
-          if(this.ListaCredenciamento2.length <= 0){
-            this.periodo = true;
-            this.contadorEsgotado = false;
-          }else{
-            
-            this.p1();
-            this.pesquisaCredenciamento();
-            this.contadorEsgotado = false;
-          }
-          
-        })
-        break;
-        default:
-          this.unico = true;
-          this.novaPesquisa = true; 
-        this.contadorEsgotado = true;
-    
-        let elemento3 = (<HTMLInputElement>document.getElementById("data1")).value;
-        this.data1 = (<HTMLInputElement>document.getElementById("data1")).value;
-        this.data2 = (<HTMLInputElement>document.getElementById("data2")).value;
-        this.exame = (<HTMLInputElement>document.getElementById("exame")).value; 
-         (<HTMLInputElement>document.getElementById("datas")).style.display="none";
-         (<HTMLInputElement>document.getElementById("periodo")).style.display="block"
-        let elemento4 = (<HTMLInputElement>document.getElementById("data2")).value; 
-        let elemento6 = (<HTMLInputElement>document.getElementById("exame")).value; 
-        
-          this.AlunoService.getAllCredenciamentosoma(elemento3, elemento4, mun,elemento6).subscribe(
-            result => {
-              this.ListaCredenciamento2 = result,
-                this.listaSomaClinicas.push(this.ListaCredenciamento2);
-    
-            })
-        const contador2 = timer(3000);
-        contador2.subscribe(() => {
-          if(this.ListaCredenciamento2.length <= 0){
-            this.periodo = true;
-            this.contadorEsgotado = false;
-          }else{
-            
-            this.p1();
-            this.pesquisaCredenciamento2();
-            this.contadorEsgotado = false;
-          }
-          
-        })
+    let elemento3 = (<HTMLInputElement>document.getElementById("mun")).value;
+    this.data1 = elemento1;
+    this.data2 = elemento2;
+    if(elemento3 == 'null'){
+       varaux = null;
+    }else {
+      varaux = elemento3;
     }
-    
-    
+    this.AlunoService.getAllCredenciamento(elemento1,elemento2,varaux).subscribe(result => { this.ListaCredenciamento = result, this.ListaCredenciamento.length > 0 ? this.btpdf = true : this.btpdf = false  });
+    this.AlunoService.getAllCredenciamentosoma(elemento1,elemento2,varaux).subscribe(result => { this.ListaCredenciamentoSoma = result, this.ListaCredenciamentoSoma.length > 0 ? this.periodo = false : this.periodo = true });
+  
+  /* if(this.ListaCredenciamento.length > 0  && this.ListaCredenciamentoSoma.length >0){
+    this.salver =true;
+  } */
+  
   }
+  
 
-  teste2 = [];
-
-  p1() {
-
-    var a = 0;
-    for (var a = 0; a < this.listaSomaClinicas.length; a++) {
-      for (var i = 0; i < this.listaSomaClinicas.length; i++) {
-        if (this.listaSomaClinicas[a][i] == undefined) {
-          continue
-        }
-        else {
-          this.teste2.push(this.listaSomaClinicas[a][i])
-        }
-
-      }
-    }
+  PDF(){
+    this.salver = true
+    this.exportPDF();
   }
 
   
   exportPDF() {
-    this.salver = true
+   /*  this.salver = true */
+   /* alert('Entrou aq') */
     const contador = timer(5000);
     contador.subscribe(() => {
       var doc = new jsPDF('p', 'pt', 'a4');

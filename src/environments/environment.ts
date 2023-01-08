@@ -7,6 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost:5000/api/'  */ 
   production: true,
   apiUrl: 'https://conteeduca.com.br:21243/api/'
+  /* apiUrl: 'https://localhost:5000/api/' */
 };
 
 /*

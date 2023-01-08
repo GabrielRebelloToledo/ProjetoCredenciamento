@@ -9,6 +9,7 @@ import { Municipio } from './cadastrar-municipios/municipio';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 import { Categoria } from './cadastro-categorias/categoria';
 import { Credenciamento } from './lancar-credenciamento/credenciamento';
+import { CredenciamentoSoma } from './relatorio-credenciamento/credeniamentoSoma';
 
 
 const API = environment.apiUrl;
@@ -136,16 +137,12 @@ export class AlunoService {
   getAllCredenciamentoT(): Observable<Credenciamento[]> {
     return this.http.get<Credenciamento[]>(`${API}credenciamento/todos`);
   }
-  getAllCredenciamento(dt1,dt2,exame): Observable<Credenciamento[]> {
-    return this.http.get<Credenciamento[]>(`${API}credenciamento/${dt1}/${dt2}/${exame}`);
+  getAllCredenciamento(dt1,dt2,mun): Observable<Credenciamento[]> {
+    return this.http.get<Credenciamento[]>(`${API}credenciamento/${dt1}/${dt2}/${mun}`);
   }
-  getAllCredenciamento2(dt1,dt2,mun,exame): Observable<Credenciamento[]> {
-    console.log(dt1,dt2,mun)
-    return this.http.get<Credenciamento[]>(`${API}credenciamento/municipio/${dt1}/${dt2}/${mun}/${exame}`);
-  }
-  getAllCredenciamentosoma(dt1,dt2,mun,exame): Observable<Credenciamento[]> {
+  getAllCredenciamentosoma(dt1,dt2,mun): Observable<CredenciamentoSoma[]> {
     /* console.log(dt1,dt2,mun) */
-    return this.http.get<Credenciamento[]>(`${API}credenciamento/soma/${dt1}/${dt2}/${mun}/${exame}`);
+    return this.http.get<CredenciamentoSoma[]>(`${API}credenciamento/soma/${dt1}/${dt2}/${mun}`);
 
   }
 }

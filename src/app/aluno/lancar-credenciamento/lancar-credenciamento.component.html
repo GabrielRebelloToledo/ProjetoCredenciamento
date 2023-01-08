@@ -1,7 +1,7 @@
 <div class="content mat-elevation-z8">
   <div class="col-md-12">
     <div class="row">
-      <div class="col-md-5 mt-3">
+      <div class="col-md-4 mt-3">
         <h4 style="font-weight: bold;color: black;">Lançamento de credenciamento</h4>
         <form class="form-inline" [formGroup]="credenciamentoForm" (submit)="submit()">
           <div class="row">
@@ -52,7 +52,7 @@
           </div>
         </form>
       </div>
-      <div class="col-md-4 mt-2">
+      <div class="col-md-7 mt-2">
         <div class="table-responsive rr" >
           <table class="table table-sm table-striped ml-2" style="font-size: 13px;">
             <thead>
@@ -72,7 +72,7 @@
                   <td>{{aluno.id}}</td>
                   <td>{{aluno.municipio}}</td>
                   <td>{{aluno.clinica}}</td>
-                  <td>{{aluno.periodo}}</td>
+                  <td>{{aluno.periodo | date: 'dd/MM/yyyy'}}</td>
                   <td>R$ {{aluno.valor}}</td>
                   
                   <!-- <td>
